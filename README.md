@@ -1,59 +1,52 @@
-# `ros2_py_template` package
-ROS 2 python package.  [![Static Badge](https://img.shields.io/badge/ROS_2-Humble-34aec5)](https://docs.ros.org/en/humble/)
-## Packages and build
+# ROS 2 Kis Beadandó – Távolságfigyelő Rendszer
 
-It is assumed that the workspace is `~/ros2_ws/`.
+##  Projekt Leírás
+Ez a ROS 2 csomag egy egyszerű **távolságfigyelő rendszert** valósít meg egy **publisher és egy subscriber** node segítségével.
+- A **publisher** véletlenszerű távolságértékeket generál és elküldi egy topicra.
+- A **subscriber** fogadja az adatokat, és kiírja, hogy a távolság **biztonságos** vagy **túl közeli**.
 
-### Clone the packages
-``` r
+##  Telepítés és Futatás
+### 1️⃣ Csomag letöltése és buildelése
+```bash
 cd ~/ros2_ws/src
-```
-``` r
-git clone https://github.com/sze-info/ros2_py_template
-```
-
-### Build ROS 2 packages
-``` r
+git clone https://github.com/horvricsi/ric_n1l_meglepetes.git
 cd ~/ros2_ws
-```
-``` r
-colcon build --packages-select ros2_py_template --symlink-install
+colcon build
 ```
 
-<details>
-<summary> Don't forget to source before ROS commands.</summary>
-
-``` bash
-source ~/ros2_ws/install/setup.bash
+### 2️⃣ Környezet beállítása
+```bash
+source install/setup.bash
 ```
-</details>
-
-``` r
-ros2 launch ros2_py_template launch_example1.launch.py
+### 3️⃣ Node-ok futtatása (2 külön terminálban)
+```bash
+ros2 run my_package distance_publisher
+```
+```bash
+ros2 run my_package distance_subscriber
 ```
 
-# Delete this part if you are using it as a template
+## Node-ok és Topicok
+Node: sensor_publisher <br>
+Funkció: Generál és elküld egy véletlenszerű távolságot <br>
+Kapcsolódó Topic: /sensor_value <br>
+<br>
+Node: sensor_subscriber <br>
+Funkció: Fogadja a távolságadatokat, és eldönti, hogy túl közeli-e <br>
+Kapcsolódó Topic: /sensor_value <br>
 
-ROS 2 pacage template, to get started, use template by clicking on the Green button labeled [`Use this template`](https://github.com/sze-info/ros2_py_template/generate) / [`Create new repository`](https://github.com/sze-info/ros2_py_template/generate). 
+## Működés
+Ha a generált távolság 2 méter alatt van, a subscriber figyelmeztet, hogy túl közeli. <br>
+Ha pedig 2 méter fölött van, akkor mondja, hogy megfelelő.
 
-<p align="center"><img src="img/use_this_template01.png" width="60%" /></p>
+## Graph
 
+``` mermaid
+graph TD;
+    A[Publisher Node] -->|Publishes /sensor_value| B[Subscriber Node];
+    B -->|Processes Data| C[Checks if distance < 2];
+    C -- Yes --> D[Warning: Too Close];
+    C -- No --> E[Safe Distance];
+```
 
-Let's assume 
-- your Github username is `mycoolusername`
-- your ROS 2 repo shold be `cool_ros2_package`
-
-Replace everything in the cloned repo:
-
-- `ros2_py_template` >> `cool_ros2_package` (the folder was already renamed after `Use this template`)
-- `sze-info` >> `mycoolusername`
-- find all `todo` strings and fill the blanks
-
-The easiest way is VS code:
-
-<p align="center"><img src="img/replace01.png" width="90%" /></p>
-
-> [!IMPORTANT]  
-> Don't forget to rename the directory (folder) and the file too.
-
-Now `colcon build` your ROS 2 package and you can start wokring.
+![](img/works01.png)
