@@ -31,6 +31,10 @@ source ~/ros2_ws/install/setup.bash
 ### Két külön terminálba futassuk a node-okat
 
 ``` r
+ros2 launch ric_n1l_meglepetes launch_example1.launch.py
+```
+
+``` r
 ros2 run ric_n1l_meglepetes publisher_node
 ```
 
@@ -38,8 +42,13 @@ ros2 run ric_n1l_meglepetes publisher_node
 ros2 run ric_n1l_meglepetes subscriber_node
 ```
 
+### Graph
+
 ```mermaid
 graph TD;
     A[Publisher Node] -->|Publikál| B[/sensor_value/];
     B -->|Feliratkozik| C[Subscriber Node];
     C -.->|Adatok feldolgozása| E[Algoritmus / Kimenet];
+```
+
+![Diagram](img/image.png)
