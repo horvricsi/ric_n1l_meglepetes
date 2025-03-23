@@ -2,7 +2,7 @@ from setuptools import find_packages, setup
 from glob import glob
 import os
 
-package_name = 'ros2_py_template'
+package_name = 'ric_n1l_meglepetes'
 
 setup(
     name=package_name,
@@ -16,14 +16,15 @@ setup(
     ],
     install_requires=['setuptools'],
     zip_safe=True,
-    maintainer='todo',
-    maintainer_email='todo@todo.com',
-    description='TODO: Package description',
+    maintainer='horvricsi',
+    maintainer_email='horvathricsi1210@gmail.com',
+    description='Horváth Richárd: Távolságmérő szenzor',
     license='GNU General Public License v3.0',
     tests_require=['pytest'],
     entry_points={
-        'console_scripts': [
-            # 'control_vehicle = ros2_py_template.control_vehicle:main',
+    'console_scripts': [
+        'publisher_node = ric_n1l_meglepetes.publisher_node:main',
+        'subscriber_node = ric_n1l_meglepetes.subscriber_node:main',
         ],
     },
 )
