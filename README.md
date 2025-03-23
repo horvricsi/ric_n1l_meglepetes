@@ -1,6 +1,9 @@
 # `ric_n1l_meglepetes` package
 A package két node-ból áll. A publisher_node egy véletlen számot generál, amit sensor_value néven hirdet. A subscriber_node erre feliratkozik, majd megnézi hogy a kapott szám kisebb e a határértéknél(2). Majd kiírja a megfelelő választ.
+
+
 Megvalósítás Windows WSL2 alatt.
+
 ## Packages and build
 It is assumed that the workspace is `~/ros2_ws/`.
 
